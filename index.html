@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Last Letter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      background: url('beach-night-moon.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Dark overlay to make text readable */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+
+    h2, p, button, #letter {
+      position: relative;
+      z-index: 1;
+    }
+
+    #letter {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      width: 70%;
+      background: rgba(0,0,0,0.6);
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      text-align: left;
+      line-height: 1.6;
+      font-size: 16px;
+      white-space: pre-wrap;
+      color: #f1f1f1;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      background: #e36a6a;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #c75454;
+    }
+  </style>
+</head>
+<body>
+  <h2>I hope you read this, even if it’s too late.</h2>
+  <p>My last letter for you.</p>
+  <button onclick="startLetter()">Read it</button>
+
+  <div id="letter"></div>
+
+  <!-- Background music -->
+  <audio id="bgMusic" src="seasons.mp3" preload="auto"></audio>
+
+  <script>
+    const letterText = `
+Hi, it’s been a long time isn’t it? sorry to bother you. I don’t know if you read this or not but here i am wanting to deliver the last ounce of hope i have. 
+
+It’s been 4 years since you left. truth to be told, none of the days passed by, i haven’t think of you. yes, i know this love is a sin and i willing to carry this sin to my grave. after you sent me the closure text, i self reflected a lot during those times. i don’t even know how can i love you this much. a lot of people said its attachment but then i dont thinks so because it’s the love that come from a heart. i will not do anything about it and i’m not even hoping you to come back even if “what if” always constantly in my mind. yes, i love you still and might be forever. i also know the love i have is not a sin until i do it with my action. i’m sorry if this love disgust you. 
+
+i never regret to know you. my whole life, you are the only part of the book that i always turn back to every time. you are my comfort, my home. yes i broken inside, thanks to you, i’m learning a lot and more mature than my age. you are the turning point in my life. i cannot love anyone after you. i tried but i can’t. even if whole life i don’t have to be loved, i’m fine to live this life that carry the love i had for you. i don’t think i will ever unloved you. 
+
+i’m sorry. i’m so sorry for everything i have done to you. yes, the guilt is still with me the same as i love you. i won’t bother you anymore. this will be the last. i hope you find a man that could take care of you and your family and could give the love i couldn’t. i want you to be happy. 
+
+take care my love :)
+
+regards,
+cheri (bbg)
+`;
+
+    let i = 0;
+    function startLetter() {
+      document.getElementById("letter").style.display = "block";
+
+      // Play background music with fade-in
+      const music = document.getElementById("bgMusic");
+      music.volume = 0;
+      music.play();
+
+      let fade = setInterval(() => {
+        if (music.volume < 1) {
+          music.volume = Math.min(music.volume + 0.02, 1);
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+
+      // Typing animation
+      const interval = setInterval(() => {
+        document.getElementById("letter").textContent += letterText.charAt(i);
+        i++;
+        if (i >= letterText.length) {
+          clearInterval(interval);
+        }
+      }, 50); // typing speed
+    }
+  </script>
+</body>
+</html>
